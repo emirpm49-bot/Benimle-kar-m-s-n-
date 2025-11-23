@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benimle Çıkmak İster Misin?</title>
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffcccc, #ffe0e0);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #ff4d4d;
+    text-shadow: 1px 1px #fff;
+  }
+
+  button {
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255,0,0,0.6);
+  }
+
+  #yesButton {
+    background-color: #ff4d4d;
+    color: white;
+  }
+
+  #noButton {
+    background-color: #cccccc;
+  }
+
+  #yesFullScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ff4d4d;
+    color: white;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    z-index: 9999;
+    flex-direction: column;
+    animation: zoomIn 1s ease forwards;
+  }
+
+  @keyframes zoomIn {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Kalp animasyonu */
+  .heart {
+    position: absolute;
+    font-size: 30px;
+    animation: float 2s linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-300px) scale(1.5); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+<h1>Benimle Çıkmak İster Misin?</h1>
+<button id="yesButton">Evet</button>
+<button id="noButton">Hayır</button>
+
+<div id="yesFullScreen">
+  💖 EVET 💖
+</div>
+
+<script>
+  let noCount = 0;
+  const noButton = document.getElementById('noButton');
+  const yesFullScreen = document.getElementById('yesFullScreen');
+
+  noButton.addEventListener('click', () => {
+    noCount++;
+    if (noCount >= 10) {
+      yesFullScreen.style.display = 'flex';
+      // Kalp animasyonu oluştur
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.fontSize = 20 + Math.random() * 40 + 'px';
+        heart.textContent = '💖';
+        yesFullScreen.appendChild(heart);
+      }
+    }
+  });
+
+  document.getElementById('yesButton').addEventListener('click', () => {
+    alert('Evet dedin! 💖');
+  });
+</script>
+</body>
+</html>
